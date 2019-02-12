@@ -10,8 +10,9 @@ import Foundation
 import AwesomeEnum
 
 class Bishop: Piece {
-    var color: Color
-    var text = Awesome.Solid.chessBishop
+    let color: Color
+    let text = Awesome.Solid.chessBishop
+    let value = 3
     
     required init(_ color: Color) {
         self.color = color

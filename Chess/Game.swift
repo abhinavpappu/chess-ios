@@ -52,6 +52,10 @@ class Game: UIViewController {
             for (j, pieceOptional) in row.enumerated() {
                 let squareView = boardView.subviews[i].subviews[j]
                 
+                // remove borders
+                squareView.layer.borderWidth = 0
+                squareView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+                
                 // remove any existing subviews
                 for subview in squareView.subviews {
                     subview.removeFromSuperview()
@@ -93,18 +97,36 @@ class Game: UIViewController {
                 if let move = moves.first(where: { $0 == selectedPosition }) {
                     selectedPiece.move(board: &board, to: move)
                     setBoard()
-                    playComputer()
+                    
+                    if let winner = Board.getWinner(board: board) {
+                        gameOver(winner: winner)
+                    } else {
+                        playComputer()
+                    }
+                } else {
+                    setBoard()
                 }
                 userSelectedPiece = nil
             } else {
                 if let selectedPiece = Board.getPieceAt(board: board, position: selectedPosition) {
                     if selectedPiece.color == Game.userColor {
                         userSelectedPiece = selectedPiece
-                        print(selectedPiece.calculateMoves(board: board))
+                        let moves = selectedPiece.calculateMoves(board: board)
+                        
+                        highlightSquare(position: selectedPosition, color: .yellow)
+                        for move in moves {
+                            highlightSquare(position: move, color: .green)
+                        }
                     }
                 }
             }
         }
+    }
+    
+    func highlightSquare(position: Position, color: UIColor) {
+        let square = boardView.subviews[position.y].subviews[position.x]
+        square.layer.borderWidth = 3
+        square.layer.borderColor = color.cgColor
     }
     
     func playComputer() {
@@ -127,6 +149,14 @@ class Game: UIViewController {
         selectedPiece.move(board: &board, to: selectedMove)
         setBoard()
         
-        isUserTurn = true
+        if let winner = Board.getWinner(board: board) {
+            gameOver(winner: winner)
+        } else {
+            isUserTurn = true
+        }
+    }
+    
+    func gameOver(winner: Color) {
+        print("\(winner) wins!")
     }
 }

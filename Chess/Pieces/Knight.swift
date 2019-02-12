@@ -10,8 +10,9 @@ import Foundation
 import AwesomeEnum
 
 class Knight: Piece {
-    var color: Color
-    var text = Awesome.Solid.chessKnight
+    let color: Color
+    let text = Awesome.Solid.chessKnight
+    let value = 3
     
     required init(_ color: Color) {
         self.color = color

@@ -12,6 +12,7 @@ import AwesomeEnum
 class Pawn: Piece {
     let color: Color
     let text = Awesome.Solid.chessPawn
+    let value = 1
     let direction: Int
     var hasMoved = false
     

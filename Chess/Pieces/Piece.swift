@@ -13,6 +13,7 @@ import AwesomeEnum
 protocol Piece: AnyObject {
     var color: Color { get }
     var text: Awesome.Solid { get }
+    var value: Int { get }
     
     init(_ color: Color)
     

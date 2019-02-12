@@ -9,8 +9,17 @@
 import Foundation
 import UIKit
 
-enum Color {
+enum Color: CustomDebugStringConvertible {
     case white, black
+    
+    var debugDescription: String {
+        switch self {
+        case .white:
+            return "White"
+        case .black:
+            return "Black"
+        }
+    }
     
     func getColor() -> UIColor {
         switch self {
@@ -36,4 +45,6 @@ enum Color {
     func getColorChar() -> String {
         return self == Color.white ? "w" : "b"
     }
+    
+    
 }

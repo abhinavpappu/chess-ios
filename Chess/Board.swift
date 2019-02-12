@@ -144,4 +144,44 @@ class Board {
         
         return false
     }
+    
+    static func getScore(board: [[Piece?]], forColor: Color) -> Int {
+        var score = 8 + 2*3 + 2*3 + 2*5 + 9 + 10
+        for row in board {
+            for square in row {
+                if let piece = square {
+                    if piece.color == forColor.getOpposingColor() {
+                        score -= piece.value
+                    }
+                }
+            }
+        }
+        return score
+    }
+    
+    static func evaluateBoard(board: [[Piece?]], forColor: Color) {
+        
+    }
+    
+    static func getWinner(board: [[Piece?]]) -> Color? {
+        var whiteKingDead = true
+        var blackKingDead = true
+        for row in board {
+            for square in row {
+                if let piece = square {
+                    if piece is King {
+                        if (piece.color == .white) { whiteKingDead = false }
+                        if (piece.color == .black) { blackKingDead = false }
+                    }
+                }
+            }
+        }
+        if (whiteKingDead) {
+            return .black
+        } else if (blackKingDead) {
+            return .white
+        } else {
+            return nil
+        }
+    }
 }

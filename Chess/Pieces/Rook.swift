@@ -10,8 +10,9 @@ import Foundation
 import AwesomeEnum
 
 class Rook: Piece {
-    var color: Color
-    var text = Awesome.Solid.chessRook
+    let color: Color
+    let text = Awesome.Solid.chessRook
+    let value = 5
     
     required init(_ color: Color) {
         self.color = color
