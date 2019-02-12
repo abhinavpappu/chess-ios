@@ -17,10 +17,16 @@ class Game: UIViewController {
     let blackColor = UIColor.init(red: CGFloat(84.0 / 255.0), green: CGFloat(110.0 / 255.0), blue: CGFloat(122.0 / 255.0), alpha: CGFloat(1))
     
     var board: [[Piece?]] = []
+    var isUserTurn = false
+    var userSelectedPiece: Piece?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        isUserTurn = Game.userColor == .white
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onBoardTapped(_:))))
         
         var makeSquareWhite = true // begin with white square
         let rows = boardView.arrangedSubviews
@@ -36,19 +42,22 @@ class Game: UIViewController {
     }
     
     func resetBoard() {
-        board = Board.getInitialBoard(userColor: userColor)
+        board = Board.getInitialBoard(userColor: Game.userColor)
         Position.setBoardDimensions(board: board)
-        
-        Board.printBoard(board: board)
         setBoard()
     }
     
     func setBoard() {
         for (i, row) in board.enumerated() {
             for (j, pieceOptional) in row.enumerated() {
+                let squareView = boardView.subviews[i].subviews[j]
+                
+                // remove any existing subviews
+                for subview in squareView.subviews {
+                    subview.removeFromSuperview()
+                }
+                
                 if let piece = pieceOptional {
-                    let squareView = boardView.subviews[i].subviews[j]
-                    
                     let label = UILabel()
                     label.attributedText = piece.iconText
                     label.sizeToFit()
@@ -70,6 +79,54 @@ class Game: UIViewController {
             }
         }
     }
-
+    
+    @objc func onBoardTapped(_ sender: UITapGestureRecognizer) {
+        if isUserTurn {
+            let squareWidth = view.frame.width / 8
+            let squareHeight = view.frame.height / 8
+            let row = Int(sender.location(in: view).y / squareHeight)
+            let col = Int(sender.location(in: view).x / squareWidth)
+            let selectedPosition = Position(x: col, y: row)!
+        
+            if let selectedPiece = userSelectedPiece {
+                let moves = selectedPiece.calculateMoves(board: board)
+                if let move = moves.first(where: { $0 == selectedPosition }) {
+                    selectedPiece.move(board: &board, to: move)
+                    setBoard()
+                    playComputer()
+                }
+                userSelectedPiece = nil
+            } else {
+                if let selectedPiece = Board.getPieceAt(board: board, position: selectedPosition) {
+                    if selectedPiece.color == Game.userColor {
+                        userSelectedPiece = selectedPiece
+                        print(selectedPiece.calculateMoves(board: board))
+                    }
+                }
+            }
+        }
+    }
+    
+    func playComputer() {
+        isUserTurn = false
+        
+        var possibleMoves: [(Piece, Position)] = []
+        for row in board {
+            for square in row {
+                if let piece = square {
+                    if piece.color == Game.userColor.getOpposingColor() {
+                        for move in piece.calculateMoves(board: board) {
+                            possibleMoves.append((piece, move))
+                        }
+                    }
+                }
+            }
+        }
+        
+        let (selectedPiece, selectedMove) = possibleMoves[Int.random(in: 0..<possibleMoves.count)]
+        selectedPiece.move(board: &board, to: selectedMove)
+        setBoard()
+        
+        isUserTurn = true
+    }
 }
-

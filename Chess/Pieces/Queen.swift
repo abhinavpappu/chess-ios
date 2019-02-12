@@ -11,9 +11,14 @@ import AwesomeEnum
 
 class Queen: Piece {
     var color: Color
-    var text = Awesome.solid.chessQueen
+    var text = Awesome.Solid.chessQueen
     
     required init(_ color: Color) {
         self.color = color
+    }
+    
+    func calculateMoves(board: [[Piece?]]) -> [Position] {
+        let directions: [Direction] = [.north, .east, .south, .west, .northeast, .southeast, .southwest, .northwest]
+        return Board.calculateMovesInDirections(board: board, piece: self, directions: directions)
     }
 }

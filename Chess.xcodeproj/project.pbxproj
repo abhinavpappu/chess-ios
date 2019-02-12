@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38549CAE2212891A005D7222 /* Pods_Chess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2765DA81003C7EE2311F98 /* Pods_Chess.framework */; };
+		38549CAF2212891A005D7222 /* Pods_Chess.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2765DA81003C7EE2311F98 /* Pods_Chess.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38CB97C7220F7AB400450910 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CB97C6220F7AB400450910 /* Direction.swift */; };
 		39029D0421F251A000918C83 /* Rook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39029D0321F251A000918C83 /* Rook.swift */; };
 		39029D0621F251C000918C83 /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39029D0521F251C000918C83 /* Knight.swift */; };
 		39029D0821F251DB00918C83 /* Bishop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39029D0721F251DB00918C83 /* Bishop.swift */; };
@@ -25,7 +28,6 @@
 		39A47E0B21E678070006C070 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A47E0A21E678070006C070 /* Piece.swift */; };
 		39D1E1EA21FB8E850047F2FA /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D1E1E921FB8E850047F2FA /* Board.swift */; };
 		5CD8579B0D28CB4647C4D1E5 /* Pods_ChessUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C222DCA5A033334BB39471 /* Pods_ChessUITests.framework */; };
-		7EC9DCA6F19446F5BED26CF5 /* Pods_Chess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2765DA81003C7EE2311F98 /* Pods_Chess.framework */; };
 		90B6AFD2FC10C7467BB0D305 /* Pods_ChessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34117CF7F928707F4DBAB9B /* Pods_ChessTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +48,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		38549CB02212891A005D7222 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				38549CAF2212891A005D7222 /* Pods_Chess.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		38549CA122128673005D7222 /* AwesomeEnum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AwesomeEnum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38549CA82212870F005D7222 /* Awesome.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = Awesome.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		38549CB122128956005D7222 /* AwesomeEnum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AwesomeEnum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38CB97C6220F7AB400450910 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		39029D0321F251A000918C83 /* Rook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rook.swift; sourceTree = "<group>"; };
 		39029D0521F251C000918C83 /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		39029D0721F251DB00918C83 /* Bishop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bishop.swift; sourceTree = "<group>"; };
@@ -86,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC9DCA6F19446F5BED26CF5 /* Pods_Chess.framework in Frameworks */,
+				38549CAE2212891A005D7222 /* Pods_Chess.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +142,9 @@
 		39A47DCF21E66FEF0006C070 = {
 			isa = PBXGroup;
 			children = (
+				38549CB122128956005D7222 /* AwesomeEnum.framework */,
+				38549CA82212870F005D7222 /* Awesome.bundle */,
+				38549CA122128673005D7222 /* AwesomeEnum.framework */,
 				39A47DDA21E66FEF0006C070 /* Chess */,
 				39A47DEF21E66FF00006C070 /* ChessTests */,
 				39A47DFA21E66FF00006C070 /* ChessUITests */,
@@ -154,6 +177,7 @@
 				396EBE6C21E917C200320DD0 /* Color.swift */,
 				39D1E1E921FB8E850047F2FA /* Board.swift */,
 				3923CBF5220A0F7C0000D01C /* Position.swift */,
+				38CB97C6220F7AB400450910 /* Direction.swift */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -215,6 +239,7 @@
 				39A47DD521E66FEF0006C070 /* Frameworks */,
 				39A47DD621E66FEF0006C070 /* Resources */,
 				EBE2EFA9BDBB14A8CC450C0E /* [CP] Embed Pods Frameworks */,
+				38549CB02212891A005D7222 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -408,7 +433,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AwesomeEnum/AwesomeEnum.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -419,7 +444,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chess/Pods-Chess-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -439,6 +464,7 @@
 				39A47DDC21E66FEF0006C070 /* AppDelegate.swift in Sources */,
 				39029D0821F251DB00918C83 /* Bishop.swift in Sources */,
 				396EBE6F21E91BCB00320DD0 /* Pawn.swift in Sources */,
+				38CB97C7220F7AB400450910 /* Direction.swift in Sources */,
 				39A47E0B21E678070006C070 /* Piece.swift in Sources */,
 				39029D0621F251C000918C83 /* Knight.swift in Sources */,
 			);
@@ -546,7 +572,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -601,7 +627,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

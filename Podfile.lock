@@ -1,0 +1,16 @@
+PODS:
+  - AwesomeEnum (2.0.1)
+
+DEPENDENCIES:
+  - AwesomeEnum
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AwesomeEnum
+
+SPEC CHECKSUMS:
+  AwesomeEnum: c31d6791dd6d0cbf8b24cba1f8187d7ff4939923
+
+PODFILE CHECKSUM: 66284119ed148630fb9a166258153f9d497952fd
+
+COCOAPODS: 1.6.0

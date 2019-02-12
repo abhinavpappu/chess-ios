@@ -74,5 +74,74 @@ class Board {
                 }
             }
         }
+        return nil
+    }
+    
+    static func getPositionInDirection(board: [[Piece?]], position: Position, direction: Direction, distance: Int) -> Position? {
+        switch direction {
+        case .north:
+            return Position(x: position.x, y: position.y - distance)
+        case .east:
+            return Position(x: position.x + distance, y: position.y)
+        case .south:
+            return Position(x: position.x, y: position.y + distance)
+        case .west:
+            return Position(x: position.x - distance, y: position.y)
+        case .northeast:
+            return Position(x: position.x + distance, y: position.y - distance)
+        case .southeast:
+            return Position(x: position.x + distance, y: position.y + distance)
+        case .southwest:
+            return Position(x: position.x - distance, y: position.y + distance)
+        case .northwest:
+            return Position(x: position.x - distance, y: position.y - distance)
+        }
+    }
+    
+    static func getPieceAt(board: [[Piece?]], position: Position) -> Piece? {
+        return board[position.y][position.x]
+    }
+    
+    static func calculateMovesInDirections(board: [[Piece?]], piece: Piece, directions: [Direction], maxDistance: Int = 7) -> [Position] {
+        let position = getPiecePosition(board: board, piece: piece)!
+        var moves: [Position] = []
+        
+        var keepGoing: [Direction: Bool] = [:]
+        for direction in directions {
+            keepGoing[direction] = true
+        }
+        
+        for i in 1...maxDistance {
+            for direction in directions {
+                if (keepGoing[direction]!) {
+                    if let position = getPositionInDirection(board: board, position: position, direction: direction, distance: i) {
+                        if let otherPiece = getPieceAt(board: board, position: position) {
+                            if piece.color != otherPiece.color {
+                                moves.append(position)
+                            }
+                            keepGoing[direction] = false
+                        } else {
+                            moves.append(position)
+                        }
+                    } else {
+                        keepGoing[direction] = false
+                    }
+                }
+            }
+        }
+        
+        return moves
+    }
+    
+    // does not check if move is valid
+    static func movePiece(board: inout [[Piece?]], piece: Piece, to: Position) -> Bool {
+        // make sure piece is on the board first
+        if let position = getPiecePosition(board: board, piece: piece) {
+            board[to.y][to.x] = piece
+            board[position.y][position.x] = nil
+            return true
+        }
+        
+        return false
     }
 }

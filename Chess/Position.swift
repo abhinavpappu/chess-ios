@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Position {
+class Position: CustomDebugStringConvertible, Equatable {
     let x: Int
     let y: Int
     
@@ -16,7 +16,7 @@ class Position {
     static var boardHeight = 8
     
     init?(x: Int, y: Int, width: Int = boardWidth, height: Int = boardHeight) {
-        if x < width && x > 0 && y > 0 && y < height {
+        if x < width && x >= 0 && y >= 0 && y < height {
             self.x = x
             self.y = y
         } else {
@@ -27,5 +27,13 @@ class Position {
     static func setBoardDimensions(board: [[Piece?]]) {
         boardWidth = board[0].count
         boardHeight = board.count
+    }
+    
+    var debugDescription: String {
+        return "(\(x), \(y))"
+    }
+    
+    static func == (lhs: Position, rhs: Position) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
